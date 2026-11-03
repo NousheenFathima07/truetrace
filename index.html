@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Modern Calculator</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="calculator-wrapper">
+    <div class="calculator-card" role="region" aria-label="Calculator">
+      <!-- Header -->
+      <header class="calculator-header">
+        <div class="brand">
+          <span class="brand-dot"></span>
+          <span class="brand-title">Calculator</span>
+        </div>
+      </header>
+
+      <!-- Display -->
+      <section class="calculator-display" aria-live="polite">
+        <div class="previous-operand" id="previousOperand" data-testid="previous-operand"></div>
+        <div class="current-operand" id="currentOperand" data-testid="current-operand">0</div>
+      </section>
+
+      <!-- Keypad -->
+      <section class="keypad" role="group" aria-label="Calculator keypad">
+        <!-- Row 1: Actions & Operator -->
+        <button type="button" class="btn btn-action" data-action="clear" id="btnClear" aria-label="Clear">C</button>
+        <button type="button" class="btn btn-action" data-action="delete" id="btnDelete" aria-label="Delete">⌫</button>
+        <button type="button" class="btn btn-operator" data-operator="÷" id="btnDivide" aria-label="Divide">÷</button>
+        <button type="button" class="btn btn-operator" data-operator="×" id="btnMultiply" aria-label="Multiply">×</button>
+
+        <!-- Row 2: 7, 8, 9, Subtract -->
+        <button type="button" class="btn btn-number" data-number="7" id="btn7">7</button>
+        <button type="button" class="btn btn-number" data-number="8" id="btn8">8</button>
+        <button type="button" class="btn btn-number" data-number="9" id="btn9">9</button>
+        <button type="button" class="btn btn-operator" data-operator="-" id="btnSubtract" aria-label="Subtract">-</button>
+
+        <!-- Row 3: 4, 5, 6, Add -->
+        <button type="button" class="btn btn-number" data-number="4" id="btn4">4</button>
+        <button type="button" class="btn btn-number" data-number="5" id="btn5">5</button>
+        <button type="button" class="btn btn-number" data-number="6" id="btn6">6</button>
+        <button type="button" class="btn btn-operator" data-operator="+" id="btnAdd" aria-label="Add">+</button>
+
+        <!-- Row 4: 1, 2, 3, Equals (spans 2 rows or standard grid) -->
+        <button type="button" class="btn btn-number" data-number="1" id="btn1">1</button>
+        <button type="button" class="btn btn-number" data-number="2" id="btn2">2</button>
+        <button type="button" class="btn btn-number" data-number="3" id="btn3">3</button>
+        <button type="button" class="btn btn-equals" data-action="equals" id="btnEquals" aria-label="Equals">=</button>
+
+        <!-- Row 5: 0, Decimal -->
+        <button type="button" class="btn btn-number btn-zero" data-number="0" id="btn0">0</button>
+        <button type="button" class="btn btn-number" data-action="decimal" id="btnDecimal" aria-label="Decimal">.</button>
+      </section>
+
+      <!-- Keyboard shortcut hint -->
+      <footer class="calculator-footer">
+        <span>Keyboard friendly &bull; Esc = Clear &bull; Backspace = Delete</span>
+      </footer>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
