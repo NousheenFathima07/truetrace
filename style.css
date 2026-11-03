@@ -1,0 +1,306 @@
+/* Reset & Root Variables */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --bg-gradient-start: #0f172a;
+  --bg-gradient-end: #1e1b4b;
+  --card-bg: rgba(30, 41, 59, 0.85);
+  --card-border: rgba(255, 255, 255, 0.1);
+  --card-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5), 0 0 40px rgba(99, 102, 241, 0.15);
+
+  --display-bg: #090d16;
+  --display-text: #f8fafc;
+  --display-prev: #94a3b8;
+
+  --btn-num-bg: #1e293b;
+  --btn-num-hover: #334155;
+  --btn-num-active: #475569;
+  --btn-num-text: #f1f5f9;
+
+  --btn-action-bg: #ef4444;
+  --btn-action-hover: #dc2626;
+  --btn-action-active: #b91c1c;
+  --btn-action-text: #ffffff;
+
+  --btn-action-del-bg: #f97316;
+  --btn-action-del-hover: #ea580c;
+  --btn-action-del-active: #c2410c;
+
+  --btn-op-bg: #4f46e5;
+  --btn-op-hover: #4338ca;
+  --btn-op-active: #3730a3;
+  --btn-op-text: #ffffff;
+
+  --btn-eq-bg: #10b981;
+  --btn-eq-hover: #059669;
+  --btn-eq-active: #047857;
+  --btn-eq-text: #ffffff;
+
+  --font-family: 'Outfit', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --radius-lg: 24px;
+  --radius-md: 16px;
+  --radius-sm: 12px;
+}
+
+body {
+  font-family: var(--font-family);
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(circle at 50% 10%, #312e81 0%, var(--bg-gradient-start) 60%, var(--bg-gradient-end) 100%);
+  color: var(--display-text);
+  padding: 1.5rem;
+  overflow-x: hidden;
+}
+
+/* Outer layout */
+.calculator-wrapper {
+  width: 100%;
+  max-width: 380px;
+  margin: auto;
+}
+
+/* Main Card */
+.calculator-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid var(--card-border);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--card-shadow);
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Header */
+.calculator-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.brand-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: #6366f1;
+  box-shadow: 0 0 10px #6366f1;
+}
+
+.brand-title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: #cbd5e1;
+}
+
+/* Display Screen */
+.calculator-display {
+  background: var(--display-bg);
+  border-radius: var(--radius-md);
+  padding: 1.25rem 1.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: flex-end;
+  min-height: 100px;
+  box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.4);
+  border: 1px solid rgba(255, 255, 255, 0.05);
+  overflow: hidden;
+  word-break: break-all;
+  user-select: text;
+}
+
+.previous-operand {
+  font-size: 1rem;
+  color: var(--display-prev);
+  min-height: 1.4rem;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  transition: all 0.15s ease;
+}
+
+.current-operand {
+  font-size: 2.5rem;
+  font-weight: 600;
+  color: var(--display-text);
+  line-height: 1.15;
+  transition: font-size 0.15s ease;
+  max-width: 100%;
+}
+
+.current-operand.error {
+  color: #f87171;
+  font-size: 1.75rem;
+}
+
+/* Keypad Grid: 4 columns x 5 rows */
+.keypad {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 60px);
+  gap: 0.75rem;
+}
+
+/* Buttons */
+.btn {
+  border: none;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-family);
+  font-size: 1.35rem;
+  font-weight: 500;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.2);
+}
+
+.btn:focus-visible {
+  outline: 2px solid #818cf8;
+  outline-offset: 2px;
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+/* Number Buttons */
+.btn-number {
+  background: var(--btn-num-bg);
+  color: var(--btn-num-text);
+}
+
+.btn-number:hover {
+  background: var(--btn-num-hover);
+}
+
+.btn-number:active {
+  background: var(--btn-num-active);
+}
+
+/* Zero button spans 2 columns in bottom row */
+.btn-zero {
+  grid-column: span 2;
+}
+
+/* Action Buttons (Clear & Delete) */
+.btn-action[data-action="clear"] {
+  background: var(--btn-action-bg);
+  color: var(--btn-action-text);
+  font-weight: 600;
+}
+
+.btn-action[data-action="clear"]:hover {
+  background: var(--btn-action-hover);
+}
+
+.btn-action[data-action="clear"]:active {
+  background: var(--btn-action-active);
+}
+
+.btn-action[data-action="delete"] {
+  background: var(--btn-action-del-bg);
+  color: #ffffff;
+  font-size: 1.25rem;
+}
+
+.btn-action[data-action="delete"]:hover {
+  background: var(--btn-action-del-hover);
+}
+
+.btn-action[data-action="delete"]:active {
+  background: var(--btn-action-del-active);
+}
+
+/* Operator Buttons */
+.btn-operator {
+  background: var(--btn-op-bg);
+  color: var(--btn-op-text);
+  font-size: 1.45rem;
+}
+
+.btn-operator:hover {
+  background: var(--btn-op-hover);
+}
+
+.btn-operator:active {
+  background: var(--btn-op-active);
+}
+
+.btn-operator.active-op {
+  background: #6366f1;
+  box-shadow: 0 0 12px rgba(99, 102, 241, 0.6);
+}
+
+/* Equals Button spans 2 rows */
+.btn-equals {
+  grid-column: 4;
+  grid-row: 4 / 6;
+  background: var(--btn-eq-bg);
+  color: var(--btn-eq-text);
+  font-size: 1.6rem;
+  font-weight: 600;
+}
+
+.btn-equals:hover {
+  background: var(--btn-eq-hover);
+}
+
+.btn-equals:active {
+  background: var(--btn-eq-active);
+}
+
+/* Footer note */
+.calculator-footer {
+  text-align: center;
+  font-size: 0.75rem;
+  color: #64748b;
+  margin-top: 0.25rem;
+}
+
+/* Responsive styles */
+@media (max-width: 420px) {
+  body {
+    padding: 1rem 0.5rem;
+  }
+
+  .calculator-card {
+    padding: 1.25rem;
+    gap: 1rem;
+    border-radius: 20px;
+  }
+
+  .keypad {
+    grid-template-rows: repeat(5, 54px);
+    gap: 0.5rem;
+  }
+
+  .btn {
+    font-size: 1.25rem;
+    border-radius: 10px;
+  }
+
+  .current-operand {
+    font-size: 2.1rem;
+  }
+}
